@@ -1,0 +1,44 @@
+drop database QLThuvien;
+CREATE DATABASE QLThuvien;
+USE QLThuvien;
+
+CREATE TABLE Nhaxuatban (
+    Manxb INT PRIMARY KEY AUTO_INCREMENT,
+    Tennxb VARCHAR(255) NOT NULL,
+    Dienthoai VARCHAR(20)
+);
+
+CREATE TABLE Tacgia (
+    Matacgia INT PRIMARY KEY AUTO_INCREMENT,
+    Tentacgia VARCHAR(255) NOT NULL,
+    Gioitinh ENUM('Nam', 'Nữ') NOT NULL
+);
+
+CREATE TABLE Sach (
+    Masach INT PRIMARY KEY AUTO_INCREMENT,
+    Tensach VARCHAR(255) NOT NULL,
+    Chungloai VARCHAR(100),
+    Manxb INT,
+    Matacgia INT,
+    Dongia DECIMAL(10,2) CHECK (Dongia = 0),
+    Ngayxb DATE,
+    FOREIGN KEY (Manxb) REFERENCES Nhaxuatban(Manxb),
+    FOREIGN KEY (Matacgia) REFERENCES Tacgia(Matacgia)
+);
+
+
+INSERT INTO Nhaxuatban (Tennxb, Dienthoai) VALUES
+('Kim Đồng', '0123456789'),
+('Giáo dục', '0234567890'),
+('Giao thông vận tải', '0345678901'),
+('Lao động', '0456789012'),
+('Khoa học & Kỹ thuật', '0567890123');
+
+INSERT INTO Tacgia (Tentacgia, Gioitinh) VALUES
+('Nguyễn Nhật Ánh', 'Nam'),
+('Phạm Văn Ất', 'Nam'),
+('Tô Hoài', 'Nam'),
+('Nguyễn Huy Tưởng', 'Nam'),
+('Thạch Lam', 'Nam'),
+('Nguyễn Ngọc Tư', 'Nữ'),
+('Hồ Biểu Chánh', 'Nam');
